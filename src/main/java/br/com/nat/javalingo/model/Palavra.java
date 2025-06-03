@@ -13,10 +13,10 @@ public class Palavra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String original;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String traducao;
 
     private int nivelAprendizado = 0;
