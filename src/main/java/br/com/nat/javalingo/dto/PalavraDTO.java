@@ -15,7 +15,7 @@ public class PalavraDTO {
     private LocalDate dataAdicao;
     private List<Exemplo> exemplos;
 
-    public static PalavraDTO criarDTO(Palavra palavra){
+    public static PalavraDTO criarDTO(Palavra palavra) {
         PalavraDTO palavraDTO = new PalavraDTO();
 
         palavraDTO.original = palavra.getOriginal();
@@ -34,12 +34,12 @@ public class PalavraDTO {
                 .collect(Collectors.joining("\n"));
 
         return """
-                Original: %s,
-                Tradução: %s,
-                Status: %s,
-                Data Adição: %s,
+                Palavra: %s = %s
+                Categoria: %s
+                Data Adição: %s
                 Exemplos:
                 %s
                 """.formatted(original.toUpperCase(), traducao.toUpperCase(), categoria, dataAdicao, exemplosString);
     }
 }
+
