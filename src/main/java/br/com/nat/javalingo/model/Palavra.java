@@ -7,16 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "palavras")
+@Table(
+    name = "palavras",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"original", "traducao"})
+)
 public class Palavra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String original;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String traducao;
 
     private int nivelAprendizado = 0;
