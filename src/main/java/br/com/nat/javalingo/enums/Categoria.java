@@ -1,9 +1,25 @@
 package br.com.nat.javalingo.enums;
 
 public enum Categoria {
-    NOVA,
-    REVISAO,
-    APRENDIDA;
+    NOVA (0,2),
+    REVISAO (3,4),
+    APRENDIDA (5,5);
+
+    final int min;
+    final int max;
+
+    Categoria(int min, int max){
+        this.min = min;
+        this.max = max;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
 
     public static Categoria converterNivelParaCategoria(int nivelAprendizado){
         switch (nivelAprendizado){
@@ -21,9 +37,9 @@ public enum Categoria {
     @Override
     public String toString() {
         return switch (this){
-            case NOVA -> "NOVA";
-            case REVISAO -> "REVISÃO";
-            case APRENDIDA -> "APRENDIDA";
+            case NOVA -> "Nova";
+            case REVISAO -> "Revisão";
+            case APRENDIDA -> "Aprendida";
         };
     }
 }
