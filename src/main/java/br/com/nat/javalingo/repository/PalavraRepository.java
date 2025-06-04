@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PalavraRepository extends JpaRepository<Palavra, Long> {
     @Query("SELECT p FROM Palavra p WHERE p.nivelAprendizado BETWEEN :minimo AND :maximo")
@@ -12,4 +13,9 @@ public interface PalavraRepository extends JpaRepository<Palavra, Long> {
 
     @Query("SELECT p FROM Palavra p WHERE UPPER(p.original) ILIKE UPPER(%:usuarioPesquisa%) OR UPPER(p.traducao) ILIKE UPPER(%:usuarioPesquisa%)")
     List<Palavra> buscarPalavras(String usuarioPesquisa);
+
+    @Query("SELECT p FROM Palavra p WHERE UPPER(p.original) ILIKE UPPER(%:traducao%) AND UPPER(p.traducao) ILIKE UPPER(%:original%)")
+    Optional<Palavra> buscarPalavraPorAmbosCampos(String original, String traducao);
+
+    Optional<Palavra> findPalavraByTraducaoIgnoreCase(String traducao);
 }
