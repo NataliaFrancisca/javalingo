@@ -1,0 +1,33 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "original": {
+        "type": "string"
+      },
+      "traducao": {
+        "type": "string"
+      },
+      "exemplos": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "original": {
+              "type": "string"
+            },
+            "traducao": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "required": [
+      "original",
+      "traducao",
+      "exemplos"
+    ]
+  }
+}
