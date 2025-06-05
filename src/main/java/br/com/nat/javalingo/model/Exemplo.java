@@ -3,38 +3,27 @@ package br.com.nat.javalingo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "exemplos")
-public class Exemplo {
+@Table(
+    name = "exemplos",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"original", "traducao"})
+)
+public class Exemplo extends Traducao{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String original;
-    @Column(unique = true, nullable = false)
-    private String traducao;
-
     @ManyToOne
     Palavra palavra;
 
+    public Exemplo(){}
+
+    public Exemplo(String original, String traducao, Palavra palavra){
+        super(original, traducao);
+        this.palavra = palavra;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getOriginal() {
-        return original;
-    }
-
-    public void setOriginal(String original) {
-        this.original = original;
-    }
-
-    public String getTraducao() {
-        return traducao;
-    }
-
-    public void setTraducao(String traducao) {
-        this.traducao = traducao;
     }
 
     public Palavra getPalavra() {
@@ -47,6 +36,6 @@ public class Exemplo {
 
     @Override
     public String toString() {
-        return "%s > %s".formatted(original, traducao);
+        return "%s > %s".formatted(this.getOriginal(), this.getTraducao());
     }
 }

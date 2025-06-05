@@ -11,41 +11,25 @@ import java.util.List;
     name = "palavras",
     uniqueConstraints = @UniqueConstraint(columnNames = {"original", "traducao"})
 )
-public class Palavra {
+public class Palavra extends Traducao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String original;
-
-    @Column(nullable = false)
-    private String traducao;
-
     private int nivelAprendizado = 0;
     private final LocalDate dataAdicao = LocalDate.now();
 
     @OneToMany(mappedBy = "palavra", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Exemplo> exemplos = new ArrayList<>();
 
+    public Palavra(){}
+
+    public Palavra(DadosPalavra dadosPalavra, int nivelAprendizado){
+        super(dadosPalavra.original(), dadosPalavra.traducao());
+        this.nivelAprendizado = nivelAprendizado;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getOriginal() {
-        return original;
-    }
-
-    public void setOriginal(String original) {
-        this.original = original;
-    }
-
-    public String getTraducao() {
-        return traducao;
-    }
-
-    public void setTraducao(String traducao) {
-        this.traducao = traducao;
     }
 
     public LocalDate getDataAdicao() {
