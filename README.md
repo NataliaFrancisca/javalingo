@@ -15,9 +15,7 @@ Javalingo é um projeto que funciona como um dicionário e um livro digital para
 ## Funcionalidades:
 1. Traduzir palavras desejadas.
 2. Salvar traduções e exemplos no banco de dados.
-3. Categorizar traduções como:
-   - Nova ou Revisão
-   - Campo Aprendida é usada para indicar o progresso no aprendizado.
+3. Categorizar traduções como: Nova ou Revisão.
 4. Realizar diferentes operações de busca:
    - Listar palavras
    - Listar frases
