@@ -18,7 +18,7 @@ public class GeminiAPI {
 
     private GenerateContentConfig configAPI() {
         try{
-            String instrucoesGemini = new ServicoLerArquivo().lerArquivo("instrucoesGemini", "json");
+            String instrucoesGemini = new LerArquivoServico().lerArquivo("instrucoesGemini", "json");
 
             return
                 GenerateContentConfig
