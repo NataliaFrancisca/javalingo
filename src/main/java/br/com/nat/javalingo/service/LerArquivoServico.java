@@ -3,7 +3,7 @@ package br.com.nat.javalingo.service;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class ServicoLerArquivo {
+public class LerArquivoServico {
 
     public String lerArquivo(String nomeArquivo, String tipoArquivo) throws IOException{
         String path = nomeArquivo.concat(".").concat(tipoArquivo);
