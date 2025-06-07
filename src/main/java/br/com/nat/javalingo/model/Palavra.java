@@ -11,10 +11,11 @@ import java.util.List;
     name = "palavras",
     uniqueConstraints = @UniqueConstraint(columnNames = {"original", "traducao"})
 )
-public class Palavra extends Traducao {
+public class Palavra extends Traducao implements Comparable<Palavra> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private int nivelAprendizado = 0;
     private final LocalDate dataAdicao = LocalDate.now();
 
@@ -48,11 +49,14 @@ public class Palavra extends Traducao {
         return nivelAprendizado;
     }
 
-    public void setNivelAprendizado(int nivelAprendizado) {
-        if(nivelAprendizado < 0 || nivelAprendizado > 5){
-            throw new IllegalArgumentException("Nível de aprendizado deve ser entre 0 e 5");
+    public void setNivelAprendizado() {
+        if(nivelAprendizado < 5){
+            this.nivelAprendizado = this.nivelAprendizado + 1;
         }
+    }
 
-        this.nivelAprendizado = nivelAprendizado;
+    @Override
+    public int compareTo(Palavra o) {
+        return this.getId().compareTo(o.getId());
     }
 }
