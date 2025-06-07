@@ -8,9 +8,7 @@ import br.com.nat.javalingo.model.Palavra;
 import br.com.nat.javalingo.repository.PalavraRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,7 +57,7 @@ public class PalavraServico {
                 System.out.println("Adicionamos novos exemplos à palavra.");
             }else{
                 this.palavraRepository.save(p);
-                System.out.println("palavra salva com sucesso.");
+                System.out.println("tradução salva com sucesso.");
             }
         });
     }
@@ -72,13 +70,14 @@ public class PalavraServico {
             return;
         }
 
-        System.out.println("** lista de todas as palavras **");
-        palavras.forEach(p -> {
-            System.out.println("""
-                    ID: %s
-                    Palavra: %s = %s
-                    %n""".formatted(p.getId(), p.getOriginal(), p.getTraducao()));
-        });
+        Collections.sort(palavras);
+
+        System.out.println("** lista de todas as palavras **\n");
+
+        palavras.forEach(p -> System.out.println("""
+                    Id: %s, Palavra: %s = %s
+                    """.formatted(p.getId(), p.getOriginal(), p.getTraducao()))
+        );
     }
 
     public void listarFrases(){
@@ -105,7 +104,7 @@ public class PalavraServico {
         });
     }
 
-    public void filtrarPalavrasPorCategoria(Categoria categoria){
+    public void filtrarEListarPalavrasPorCategoria(Categoria categoria){
         List<Palavra> palavras = this.palavraRepository.buscarPalavrasPorNivelAprendizado(categoria.getMin(), categoria.getMax());
 
         if(palavras.isEmpty()){
@@ -117,6 +116,10 @@ public class PalavraServico {
         palavras.forEach(p -> System.out.printf("%s = %s%n", p.getOriginal(), p.getTraducao()));
     }
 
+    public List<Palavra> filtrarPalavrasPorCategoria(Categoria categoria){
+        return this.palavraRepository.buscarPalavrasPorNivelAprendizado(categoria.getMin(), categoria.getMax());
+    }
+
     public void buscarPalavra(String palavra){
         List<Palavra> palavras = this.palavraRepository.buscarPalavrasQueContenhamBusca(palavra.trim());
 
@@ -125,8 +128,12 @@ public class PalavraServico {
             return;
         }
 
-        System.out.println("** palavras encontradas **");
+        System.out.println("\n** palavras encontradas **\n");
         palavras.stream().map(PalavraDTO::criarDTO).forEach(System.out::println);
+    }
+
+    public void atualizarNivelAprendizadoPalavras(List<Palavra> palavras){
+        this.palavraRepository.saveAll(palavras);
     }
 }
 
