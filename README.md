@@ -64,7 +64,7 @@ cd javalingo
      ```mvn spring-boot:run```
 
 ## Atividades Pendentes:
-- [ ] criar flashcards para evoluir o nível de aprendizado de cada tradução.
+- [X] criar flashcards para evoluir o nível de aprendizado de cada tradução.
 - [ ] implementar funcionalidades de remoção de palavras e exemplos.
 - [ ] criar testes unitários.
 
